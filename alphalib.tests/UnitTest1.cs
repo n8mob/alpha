@@ -15,7 +15,7 @@ namespace Tests
         }
 
         [Test]
-        public void Test1()
+        public void IsA()
         {
             Assert.AreEqual('A', unitUnderTest.A1);
         }
