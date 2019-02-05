@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace alphalib
+namespace com.corporealabstract.alpha
 {
     public class Class1
     {
