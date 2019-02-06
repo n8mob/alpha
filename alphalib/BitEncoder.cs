@@ -12,6 +12,5 @@ namespace com.corporealabstract.alpha
         string MakeBitString(TDec c);
         string MakeBitString(string s);
         TDec ReadBitString(string charBits);
-        IEnumerable<KeyValuePair<TDec, TEnc>> ReadEncoding(string input);
     }
 }

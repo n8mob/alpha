@@ -6,8 +6,6 @@ namespace com.corporealabstract.alpha
 {
     public abstract class BaseEncoder<TEnc> : BitEncoder<TEnc, char>
     {
-        protected static readonly char[] ENCODING_SPLITTERS = ": ".ToCharArray();
-
         private Dictionary<char, TEnc> encoding = new Dictionary<char, TEnc>();
         private Dictionary<TEnc, char> decoding = new Dictionary<TEnc, char>();
 
@@ -37,7 +35,5 @@ namespace com.corporealabstract.alpha
         public abstract string MakeBitString(char c);
 
         public abstract char ReadBitString(string charBits);
-
-        public abstract IEnumerable<KeyValuePair<char, TEnc>> ReadEncoding(string input);
     }
 }

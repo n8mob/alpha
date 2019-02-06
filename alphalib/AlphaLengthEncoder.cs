@@ -53,19 +53,5 @@ namespace com.corporealabstract.alpha
 
             return Decode(charBits.Length);
         }
-
-        public override IEnumerable<KeyValuePair<char, int>> ReadEncoding(string input)
-        {
-            var charEncodings = input.Split('\n');
-
-            foreach (var charEncoding in charEncodings)
-            {
-                var encodingParts = charEncoding.Split(ENCODING_SPLITTERS, StringSplitOptions.RemoveEmptyEntries);
-                char c = encodingParts[0][0];
-                byte b = Convert.ToByte(encodingParts[1]);
-
-                yield return new KeyValuePair<char, int>(c, b);
-            }
-        }
     }
 }

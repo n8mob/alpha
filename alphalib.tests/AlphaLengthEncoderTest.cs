@@ -15,19 +15,19 @@ namespace com.corporealabstract.alpha.tests
         [SetUp]
         public void SetUp()
         {
-            d1 = new Dictionary<char, int>()
+            d1 = new Dictionary<char, int>
             {
                 ['A'] = 1,
                 ['B'] = 2
             };
 
-            d2 = new Dictionary<char, int>()
+            d2 = new Dictionary<char, int>
             {
                 ['C'] = 3,
                 ['D'] = 4
             };
 
-            d3 = new Dictionary<char, int>()
+            d3 = new Dictionary<char, int>
             {
                 ['_'] = 1,
                 ['.'] = 2,
@@ -35,10 +35,13 @@ namespace com.corporealabstract.alpha.tests
                 ['B'] = 2
             };
 
-            unitUnderTest = new AlphaLengthEncoder();
-            unitUnderTest.Encoding = d3;
+            unitUnderTest = new AlphaLengthEncoder
+            {
+                Encoding = d3
+            };
         }
 
+        // this tests code that is actually in BaseEncoder
         [Test]
         public void SetEncodingSetsDecodingTest()
         {
