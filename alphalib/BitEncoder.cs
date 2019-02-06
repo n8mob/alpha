@@ -7,7 +7,6 @@ namespace com.corporealabstract.alpha
     {
         TEnc DefaultEncoded { get; set; }
         TDec DefaultDecoded { get; set; }
-        string MappedEncoding { get; set; }
         TEnc Encode(TDec c);
         TDec Decode(TEnc value);
         string MakeBitString(TDec c);

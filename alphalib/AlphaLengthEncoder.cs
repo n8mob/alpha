@@ -10,7 +10,6 @@ namespace com.corporealabstract.alpha
         Regex onlyOnes = new Regex("^1*$");
         private int _defaultEncoded;
         private char _defaultDecoded;
-        private string _mappedEncoding;
 
         public string PunctuationCharacters { get; private set; }
 
@@ -26,20 +25,12 @@ namespace com.corporealabstract.alpha
             set => _defaultDecoded = value;
         }
 
-        public override string MappedEncoding
-        {
-            get => _mappedEncoding;
-            set => _mappedEncoding = value;
-        }
-
-        public AlphaLengthEncoder(  int defaultEncoded = 0,
-                                    char defaultDecoded = '?',
-                                    string mappedEncoding = "",
-                                    string punctuationCharacters = "_.")
+        public AlphaLengthEncoder(int defaultEncoded = 0,
+                                  char defaultDecoded = '?',
+                                  string punctuationCharacters = "_.")
         {
             _defaultEncoded = defaultEncoded;
             _defaultDecoded = defaultDecoded;
-            _mappedEncoding = mappedEncoding;
             PunctuationCharacters = punctuationCharacters;
         }
 

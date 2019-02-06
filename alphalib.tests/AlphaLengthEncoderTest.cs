@@ -67,5 +67,23 @@ namespace com.corporealabstract.alpha.tests
             var actual = unitUnderTest.MakeBitString('.');
             Assert.AreEqual("000", actual);
         }
+
+        [Test]
+        public void MakeBitStringA() => Assert.AreEqual("10", unitUnderTest.MakeBitString('A'));
+
+        [Test]
+        public void MakeBitStringB() => Assert.AreEqual("110", unitUnderTest.MakeBitString('B'));
+
+        [Test]
+        public void EncodePeriod() => Assert.AreEqual(1, unitUnderTest.Encode('A'));
+
+        [Test]
+        public void EncodeA() => Assert.AreEqual(1, unitUnderTest.Encode('A'));
+
+        [Test]
+        public void EncodeB() => Assert.AreEqual(2, unitUnderTest.Encode('B'));
+
+        [Test]
+        public void Decode1() => Assert.AreEqual('A', unitUnderTest.Decode(1));
     }
 }

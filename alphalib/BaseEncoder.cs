@@ -27,7 +27,6 @@ namespace com.corporealabstract.alpha
 
         public abstract TEnc DefaultEncoded { get; set; }
         public abstract char DefaultDecoded { get; set; }
-        public abstract string MappedEncoding { get; set; }
 
         public char Decode(TEnc value) => decoding.ContainsKey(value) ? decoding[value] : DefaultDecoded;
 
