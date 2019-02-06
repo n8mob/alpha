@@ -8,12 +8,40 @@ namespace com.corporealabstract.alpha
     public class AlphaLengthEncoder : BaseEncoder<int>
     {
         Regex onlyOnes = new Regex("^1*$");
+        private int _defaultEncoded;
+        private char _defaultDecoded;
+        private string _mappedEncoding;
 
-        public string PunctuationCharacters { get; set; }
+        public string PunctuationCharacters { get; private set; }
 
-        public override int DefaultEncoded { get; set; }
-        public override char DefaultDecoded { get; set; }
-        public override string MappedEncoding { get; set; }
+        public override int DefaultEncoded
+        {
+            get => _defaultEncoded;
+            set => _defaultEncoded = value;
+        }
+
+        public override char DefaultDecoded
+        {
+            get => _defaultDecoded;
+            set => _defaultDecoded = value;
+        }
+
+        public override string MappedEncoding
+        {
+            get => _mappedEncoding;
+            set => _mappedEncoding = value;
+        }
+
+        public AlphaLengthEncoder(  int defaultEncoded = 0,
+                                    char defaultDecoded = '?',
+                                    string mappedEncoding = "",
+                                    string punctuationCharacters = "_.")
+        {
+            _defaultEncoded = defaultEncoded;
+            _defaultDecoded = defaultDecoded;
+            _mappedEncoding = mappedEncoding;
+            PunctuationCharacters = punctuationCharacters;
+        }
 
         public override string MakeBitString(char c)
         {

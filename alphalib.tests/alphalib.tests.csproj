@@ -17,4 +17,8 @@
     <ProjectReference Include="..\alphalib\alphalib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="BaseEncoderTest.cs" />
+    <Compile Remove="UnitTest1.cs" />
+  </ItemGroup>
 </Project>
