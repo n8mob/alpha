@@ -1,0 +1,76 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace com.corporealabstract.alpha
+{
+    public class AlphaLengthDeserializer : IEnumerator<char>
+    {
+        int curStart = -1;
+        char curChar = '1';
+        char otherChar = '0';
+
+        public AlphaLengthMessage Message { get; private set; }
+
+        public AlphaLengthDeserializer(AlphaLengthMessage message)
+        {
+            Message = message;
+        }
+
+        object IEnumerator.Current => Current;
+
+        public char Current
+        {
+            get
+            {
+                if (curStart < 0)
+                {
+                    throw new InvalidOperationException("Enumeration has not started, Call MoveNext");
+                }
+
+                var nextOther = Message.Code.IndexOf(otherChar, curStart);
+
+                if (nextOther < 0)
+                {
+                    nextOther = Message.Code.Length;
+                }
+
+                var nextLen = nextOther - curStart;
+
+                return Message.Serializer.Encoders[curChar].Decode(nextLen);
+            }
+        }
+
+        public void Dispose()
+        {
+            Message = null;
+        }
+
+        public bool MoveNext()
+        {
+            if (curStart < 0)
+            {
+                Reset();
+                curStart = 0;
+                return true;
+            }
+            else
+            {
+                curStart = Message.Code.IndexOf(otherChar, curStart);
+
+                char temp = curChar;
+                curChar = otherChar;
+                otherChar = temp;
+
+                return curStart >= 0;
+            }
+        }
+
+        public void Reset()
+        {
+            curStart = -1;
+            curChar = '1';
+            otherChar = '0';
+        }
+    }
+}

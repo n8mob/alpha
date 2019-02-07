@@ -6,10 +6,10 @@ namespace com.corporealabstract.alpha
 {
     public abstract class BaseEncoder<TEnc> : BitEncoder<TEnc, char>
     {
-        private Dictionary<char, TEnc> encoding = new Dictionary<char, TEnc>();
+        protected Dictionary<char, TEnc> encoding = new Dictionary<char, TEnc>();
         private Dictionary<TEnc, char> decoding = new Dictionary<TEnc, char>();
 
-        public Dictionary<char, TEnc> Encoding
+        public virtual Dictionary<char, TEnc> Encoding
         {
             get => encoding;
             set

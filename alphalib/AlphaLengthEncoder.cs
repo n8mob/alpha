@@ -7,11 +7,12 @@ namespace com.corporealabstract.alpha
 {
     public class AlphaLengthEncoder : BaseEncoder<int>
     {
-        Regex onlyOnes = new Regex("^1*$");
         private int _defaultEncoded;
         private char _defaultDecoded;
 
-        public string PunctuationCharacters { get; private set; }
+        public char EncodingChar { get; }
+
+        private Regex onlyEncodedChar;
 
         public override int DefaultEncoded
         {
@@ -25,30 +26,28 @@ namespace com.corporealabstract.alpha
             set => _defaultDecoded = value;
         }
 
-        public AlphaLengthEncoder(int defaultEncoded = 0,
-                                  char defaultDecoded = '?',
-                                  string punctuationCharacters = "_.")
+        public AlphaLengthEncoder(char encodingChar,
+                                  int defaultEncoded,
+                                  char defaultDecoded)
         {
             _defaultEncoded = defaultEncoded;
             _defaultDecoded = defaultDecoded;
-            PunctuationCharacters = punctuationCharacters;
+
+            EncodingChar = encodingChar;
+
+            onlyEncodedChar = new Regex($"^{encodingChar}*$");
         }
 
         public override string MakeBitString(char c)
         {
-            if (PunctuationCharacters.Contains(c))
-            {
-                return new string('0', Encode(c)) + '0';
-            }
-
-            return new string('1', Encode(c)) + '0';
+            return new string(EncodingChar, Encode(c));
         }
 
         public override char ReadBitString(string charBits)
         {
-            if (!onlyOnes.IsMatch(charBits))
+            if (!onlyEncodedChar.IsMatch(charBits))
             {
-                throw new ArgumentException("Encoded character must be all '1's");
+                throw new ArgumentException($"Encoded character must be all '{EncodingChar}'s");
             }
 
             return Decode(charBits.Length);

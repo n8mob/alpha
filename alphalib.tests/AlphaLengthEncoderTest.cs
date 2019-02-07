@@ -8,7 +8,6 @@ namespace com.corporealabstract.alpha.tests
     {
         private Dictionary<char, int> d1;
         private Dictionary<char, int> d2;
-        private Dictionary<char, int> d3;
 
         private AlphaLengthEncoder unitUnderTest;
 
@@ -27,17 +26,9 @@ namespace com.corporealabstract.alpha.tests
                 ['D'] = 4
             };
 
-            d3 = new Dictionary<char, int>
+            unitUnderTest = new AlphaLengthEncoder('1', 0, '?')
             {
-                ['_'] = 1,
-                ['.'] = 2,
-                ['A'] = 1,
-                ['B'] = 2
-            };
-
-            unitUnderTest = new AlphaLengthEncoder
-            {
-                Encoding = d3
+                Encoding = d1
             };
         }
 
@@ -58,24 +49,10 @@ namespace com.corporealabstract.alpha.tests
         }
 
         [Test]
-        public void MakeBitStringSpaceTest()
-        {
-            var actual = unitUnderTest.MakeBitString('_');
-            Assert.AreEqual("00", actual);
-        }
+        public void MakeBitStringA() => Assert.AreEqual("1", unitUnderTest.MakeBitString('A'));
 
         [Test]
-        public void MakeBitStringPeriodTest()
-        {
-            var actual = unitUnderTest.MakeBitString('.');
-            Assert.AreEqual("000", actual);
-        }
-
-        [Test]
-        public void MakeBitStringA() => Assert.AreEqual("10", unitUnderTest.MakeBitString('A'));
-
-        [Test]
-        public void MakeBitStringB() => Assert.AreEqual("110", unitUnderTest.MakeBitString('B'));
+        public void MakeBitStringB() => Assert.AreEqual("11", unitUnderTest.MakeBitString('B'));
 
         [Test]
         public void EncodePeriod() => Assert.AreEqual(1, unitUnderTest.Encode('A'));
