@@ -9,7 +9,6 @@ namespace com.corporealabstract.alpha
     {
         private Regex onlyOnes = new Regex("^1+$");
         private Regex onlyZeros = new Regex("^0+$");
-        private string zeroChars = "_.";
 
         public int DefaultEncoded { get; set; }
         public char DefaultDecoded { get; set; }
@@ -36,7 +35,7 @@ namespace com.corporealabstract.alpha
 
         public AlphaLengthEncoder ChooseEncoder(char c)
         {
-            return zeroChars.Contains(c) ? Encoders['0'] : Encoders['1'];
+            return Encoders['0'].Encoding.ContainsKey(c) ? Encoders['0'] : Encoders['1'];
         }
 
         public char ReadBitString(string charBits)
