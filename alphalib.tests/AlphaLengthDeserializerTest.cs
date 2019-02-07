@@ -7,7 +7,7 @@ namespace com.corporealabstract.alpha.tests
 {
     public class AlphaLengthDeserializerTest
     {
-        private const char ZW = '\u200b';
+        private const char ZERO_WIDTH_SPACE = '\u200b';
         private AlphaLengthMessage m1;
         private AlphaLengthSerializer e1;
         private Dictionary<char, int> d1;
@@ -25,7 +25,7 @@ namespace com.corporealabstract.alpha.tests
 
             d2 = new Dictionary<char, int>
             {
-                [ZW] = 1,
+                [ZERO_WIDTH_SPACE] = 1,
                 ['_'] = 2,
                 ['.'] = 3
             };
@@ -53,7 +53,7 @@ namespace com.corporealabstract.alpha.tests
             unitUnderTest.MoveNext();
             Assert.AreEqual('A', unitUnderTest.Current);
             Assert.IsTrue(unitUnderTest.MoveNext());
-            Assert.AreEqual(ZW, unitUnderTest.Current);
+            Assert.AreEqual(ZERO_WIDTH_SPACE, unitUnderTest.Current);
             Assert.IsTrue(unitUnderTest.MoveNext());
             Assert.AreEqual('B', unitUnderTest.Current);
             Assert.IsFalse(unitUnderTest.MoveNext());
@@ -62,9 +62,11 @@ namespace com.corporealabstract.alpha.tests
         [Test]
         public void TestLongMessage()
         {
-            var expectedString = $"A{ZW}B{ZW}A{ZW}B{ZW}B{ZW}B{ZW}B{ZW}B{ZW}";
+            var zw = ZERO_WIDTH_SPACE; // this just makes expectedString shorter
+            var expectedString = $"A{zw}B{zw}A{zw}B{zw}B{zw}B{zw}B{zw}B{zw}";
+            var expectedBareMessage = "ABABBBBB";
             var expected = expectedString.GetEnumerator();
-            Console.WriteLine($"The following should have zero-width spaces between the letters: \"{expectedString}\"");
+
             AlphaLengthMessage longMessage = new AlphaLengthMessage(e1, "1011010110110110110110");
 
             AlphaLengthDeserializer unit2 = new AlphaLengthDeserializer(longMessage);
@@ -74,8 +76,9 @@ namespace com.corporealabstract.alpha.tests
                 Assert.AreEqual(expected.Current, unit2.Current);
             }
 
-            var bareMessage = new string(longMessage.Where(c => c != ZW).ToArray());
-            Assert.AreEqual("ABABBBBB", bareMessage);
+            Assert.AreEqual(expectedString, new string(longMessage.ToArray()));
+            var bareMessage = new string(longMessage.Where(c => c != ZERO_WIDTH_SPACE).ToArray());
+            Assert.AreEqual(expectedBareMessage, bareMessage);
         }
     }
 }

@@ -3,6 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>com.corporealabstract.alpha</RootNamespace>
+    <PackageId>com.corporealabstract.alpha.lib</PackageId>
+    <Version>0.1.0</Version>
+    <Title>Corporeal Abstract Alpha Library</Title>
+    <Authors>n8mob</Authors>
+    <Company>Corporeal Abstract</Company>
+    <IncludeSymbols>true</IncludeSymbols>
+    <IncludeSource>true</IncludeSource>
+    <RepositoryUrl>https://github.com/n8mob/alpha</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
