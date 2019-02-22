@@ -1,7 +1,11 @@
+using System;
+
 namespace com.corporealabstract.alpha
 {
-    public class PuzzleData
+    public class Puzzle
     {
+        public PuzzleType Type { get; set; }
+        
         public EncodingType EncodingType { get; set; }
 
         public string ClueText { get; set; }

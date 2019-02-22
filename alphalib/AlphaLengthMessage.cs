@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 namespace com.corporealabstract.alpha
 {
-    public class AlphaLengthMessage : IEnumerable<char>
+public class AlphaLengthMessage : IEnumerable<char>
     {
         public AlphaLengthSerializer Serializer { get; }
 
