@@ -8,13 +8,14 @@ namespace com.corporealabstract.alpha
     public class GameManager : IEnumerator<Puzzle>
     {
         private IEnumerator<Puzzle> PuzzleEnumerator { get; set; }
-        public IList<Puzzle> Puzzles { get; private set; }
+
+        private IList<Puzzle> Puzzles { get; set; }
 
         public Puzzle Current => PuzzleEnumerator.Current;
 
         object IEnumerator.Current => Current;
 
-        public GameManager(IEnumerable<Puzzle> puzzles)
+        public GameManager(IList<Puzzle> puzzles)
         {
             if (!puzzles.Any())
             {
@@ -27,14 +28,11 @@ namespace com.corporealabstract.alpha
 
         public ResultOfGuess Try(string guess)
         {
-            if (guess.Equals(Current.WinState, StringComparison.InvariantCultureIgnoreCase))
-            {
-                return new ResultOfGuess(Result.WIN);
-            }
-            else
-            {
-                return new ResultOfGuess(Result.TRY_AGAIN);
-            }
+            var guessMatches = guess.Equals(Current?.WinState, StringComparison.InvariantCultureIgnoreCase);
+            
+            return guessMatches
+                ? new ResultOfGuess(Result.WIN)
+                : new ResultOfGuess(Result.TRY_AGAIN);
         }
 
         public bool MoveNext()
