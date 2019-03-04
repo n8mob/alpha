@@ -2,8 +2,10 @@ using System;
 
 namespace com.corporealabstract.alpha
 {
+    [Serializable]
     public class Puzzle
     {
+        public string Name => $"{Type} {EncodingType} {ClueText}";
         public PuzzleType Type { get; set; }
         
         public EncodingType EncodingType { get; set; }

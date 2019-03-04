@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace com.corporealabstract.alpha
 {
+    [Serializable]
     public class GameManager : IEnumerator<Puzzle>
     {
         private IEnumerator<Puzzle> PuzzleEnumerator { get; set; }
@@ -15,14 +16,20 @@ namespace com.corporealabstract.alpha
 
         object IEnumerator.Current => Current;
 
-        public GameManager(IList<Puzzle> puzzles)
+        public GameManager(IEnumerable<Puzzle> puzzles)
         {
-            if (!puzzles.Any())
+            if (puzzles == null)
+            {
+                throw new ArgumentException("Can't have a null puzzle list");
+            }
+            
+            Puzzles = new List<Puzzle>(puzzles);
+
+            if (Puzzles.Any())
             {
                 throw new ArgumentException("Can't have an empty puzzle list");
             }
             
-            Puzzles = new List<Puzzle>(puzzles);
             PuzzleEnumerator = Puzzles.GetEnumerator();
         }
 
