@@ -16,21 +16,45 @@ namespace com.corporealabstract.alpha
 
         object IEnumerator.Current => Current;
 
-        public GameManager(IEnumerable<Puzzle> puzzles)
+        public GameManager()
         {
-            if (puzzles == null)
+            Puzzles = new List<Puzzle>()
             {
-                throw new ArgumentException("Can't have a null puzzle list");
-            }
+                new Puzzle()
+                {
+                    Type = PuzzleType.Decode,
+                    EncodingType = EncodingType.Variable,
+                    ClueText = "ABC",
+                    InitialState = "ABC",
+                    WinState = "ABC"
+                },
+                new Puzzle()
+                {
+                    Type = PuzzleType.Decode,
+                    EncodingType = EncodingType.Variable,
+                    ClueText = "DEF",
+                    InitialState = "DEF",
+                    WinState = "DEF",
+                },
+                new Puzzle()
+                {
+                    Type = PuzzleType.Decode,
+                    EncodingType = EncodingType.Variable,
+                    ClueText = "GHI",
+                    InitialState = "GHI",
+                    WinState = "GHI",
+                },
+                new Puzzle()
+                {
+                    Type = PuzzleType.Decode,
+                    EncodingType = EncodingType.Variable,
+                    ClueText = "JKL",
+                    InitialState = "JKL",
+                    WinState = "JKL",
+                }
+            };
             
-            Puzzles = new List<Puzzle>(puzzles);
-
-            if (Puzzles.Any())
-            {
-                throw new ArgumentException("Can't have an empty puzzle list");
-            }
-            
-            PuzzleEnumerator = Puzzles.GetEnumerator();
+            PuzzleEnumerator = Puzzles.GetEnumerator();   
         }
 
         public ResultOfGuess Try(string guess)
@@ -54,8 +78,8 @@ namespace com.corporealabstract.alpha
 
         public void Dispose()
         {
-            this.PuzzleEnumerator = null;
-            this.Puzzles = null;
+            PuzzleEnumerator = null;
+            Puzzles = null;
         }
     }
 }
