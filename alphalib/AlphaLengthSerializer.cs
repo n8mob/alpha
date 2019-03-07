@@ -71,8 +71,6 @@ namespace com.corporealabstract.alpha
             {
                 throw new ArgumentException($"No encoding for '{c}'");
             }
-
-            return Encoders['0'].Encoding.ContainsKey(c) ? Encoders['0'] : Encoders['1'];
         }
 
         public char ReadBitString(string charBits)
