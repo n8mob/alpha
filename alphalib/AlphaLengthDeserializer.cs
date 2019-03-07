@@ -25,6 +25,8 @@ namespace com.corporealabstract.alpha
             {
                 if (curStart < 0)
                 {
+                    // seems like string.GetEnumerator().Current returns null before initialization...
+                    // should we do the same?
                     throw new InvalidOperationException("Enumeration has not started, Call MoveNext");
                 }
 

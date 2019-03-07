@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 
 namespace com.corporealabstract.alpha
@@ -58,6 +59,19 @@ namespace com.corporealabstract.alpha
 
         public AlphaLengthEncoder ChooseEncoder(char c)
         {
+            if (Encoders['0'].Encoding.ContainsKey(c))
+            {
+                return Encoders['0'];
+            }
+            else if (Encoders['1'].Encoding.ContainsKey(c))
+            {
+                return Encoders['1'];
+            }
+            else
+            {
+                throw new ArgumentException($"No encoding for '{c}'");
+            }
+
             return Encoders['0'].Encoding.ContainsKey(c) ? Encoders['0'] : Encoders['1'];
         }
 

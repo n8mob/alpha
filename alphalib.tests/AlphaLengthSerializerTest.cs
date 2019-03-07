@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using com.corporealabstract.alpha;
 using NUnit.Framework;
@@ -27,7 +28,12 @@ namespace com.corporealabstract.alpha.tests
         }
 
         [Test]
-        public void TestSpace() => Assert.AreEqual("00", unitUnderTest.MakeBitString('_'));
+        public void TestUnderscore() => Assert.AreEqual("00", unitUnderTest.MakeBitString('_'));
+
+        public void TestSpace()
+        {
+            Assert.Throws(typeof(ArgumentException), () => unitUnderTest.MakeBitString(' '));
+        }
 
         [Test]
         public void TestPeriod() => Assert.AreEqual("000", unitUnderTest.MakeBitString('.'));
