@@ -10,11 +10,31 @@ namespace com.corporealabstract.alpha
         char curChar = '1';
         char otherChar = '0';
 
-        public AlphaLengthMessage Message { get; private set; }
+        private AlphaLengthMessage Message { get; set; }
 
         public AlphaLengthDeserializer(AlphaLengthMessage message)
         {
             Message = message;
+        }
+
+        public bool MoveNext()
+        {
+            if (curStart < 0)
+            {
+                Reset();
+                curStart = 0;
+                return true;
+            }
+            else
+            {
+                curStart = Message.Code.IndexOf(otherChar, curStart);
+
+                char temp = curChar;
+                curChar = otherChar;
+                otherChar = temp;
+
+                return curStart >= 0;
+            }
         }
 
         object IEnumerator.Current => Current;
@@ -46,26 +66,6 @@ namespace com.corporealabstract.alpha
         public void Dispose()
         {
             Message = null;
-        }
-
-        public bool MoveNext()
-        {
-            if (curStart < 0)
-            {
-                Reset();
-                curStart = 0;
-                return true;
-            }
-            else
-            {
-                curStart = Message.Code.IndexOf(otherChar, curStart);
-
-                char temp = curChar;
-                curChar = otherChar;
-                otherChar = temp;
-
-                return curStart >= 0;
-            }
         }
 
         public void Reset()
