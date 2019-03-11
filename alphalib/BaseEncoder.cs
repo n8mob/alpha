@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,7 +31,13 @@ namespace com.corporealabstract.alpha
 
         public TEnc Encode(char c) => Encoding.ContainsKey(c) ? Encoding[c] : DefaultEncoded;
 
-        public string MakeBitString(string s) => string.Concat(s.Select(MakeBitString));
+        public IEnumerable<string> Serialize(string s)
+        {
+            foreach (var c in s)
+            {
+                yield return MakeBitString(c);
+            }
+        }
 
         public abstract string MakeBitString(char c);
 
