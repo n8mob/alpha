@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 
 namespace com.corporealabstract.alpha
 {
@@ -22,14 +23,14 @@ namespace com.corporealabstract.alpha
                 curStart = 0;
                 return true;
             }
-            else if (curStart > Message.Code.Length)
+            else if (curStart + Message.Serializer.Width > Message.Code.Length)
             {
                 return false;
             }
             else
             {
                 curStart += Message.Serializer.Width;
-                return curStart < Message.Code.Length;
+                return curStart + Message.Serializer.Width <= Message.Code.Length;
             }
         }
 
