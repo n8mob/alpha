@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Text.RegularExpressions;
 
 namespace com.corporealabstract.alpha
 {
     public class AlphaLengthSerializer
     {
-        private Regex onlyOnes = new Regex("^1+$");
-        private Regex onlyZeros = new Regex("^0+$");
+        private readonly Regex onlyOnes = new Regex("^1+$");
+        private readonly Regex onlyZeros = new Regex("^0+$");
 
         public int DefaultEncoded { get; set; }
         public char DefaultDecoded { get; set; }
@@ -35,11 +33,10 @@ namespace com.corporealabstract.alpha
         public IEnumerable<string> Serialize(string s)
         {
             bool lastWasChar = false;
-            bool currentIsChar = false;
 
             foreach (var c in s)
             {
-                currentIsChar = Encoders['1'].Encoding.ContainsKey(c);
+                var currentIsChar = Encoders['1'].Encoding.ContainsKey(c);
 
                 if (lastWasChar && currentIsChar)
                 {
@@ -57,7 +54,7 @@ namespace com.corporealabstract.alpha
             return ChooseEncoder(c).MakeBitString(c);
         }
 
-        public AlphaLengthEncoder ChooseEncoder(char c)
+        private AlphaLengthEncoder ChooseEncoder(char c)
         {
             if (Encoders['0'].Encoding.ContainsKey(c))
             {

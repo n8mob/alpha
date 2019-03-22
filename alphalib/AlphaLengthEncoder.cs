@@ -1,37 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace com.corporealabstract.alpha
 {
     public class AlphaLengthEncoder : BaseEncoder<int>
     {
-        private int _defaultEncoded;
-        private char _defaultDecoded;
+        private int defaultEncoded;
+        private char defaultDecoded;
 
         public char EncodingChar { get; }
 
-        private Regex onlyEncodedChar;
+        private readonly Regex onlyEncodedChar;
 
         public override int DefaultEncoded
         {
-            get => _defaultEncoded;
-            set => _defaultEncoded = value;
+            get => defaultEncoded;
+            set => defaultEncoded = value;
         }
 
         public override char DefaultDecoded
         {
-            get => _defaultDecoded;
-            set => _defaultDecoded = value;
+            get => defaultDecoded;
+            set => defaultDecoded = value;
         }
 
         public AlphaLengthEncoder(char encodingChar,
                                   int defaultEncoded,
                                   char defaultDecoded)
         {
-            _defaultEncoded = defaultEncoded;
-            _defaultDecoded = defaultDecoded;
+            this.defaultEncoded = defaultEncoded;
+            this.defaultDecoded = defaultDecoded;
 
             EncodingChar = encodingChar;
 

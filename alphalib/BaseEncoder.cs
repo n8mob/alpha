@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace com.corporealabstract.alpha
 {
     public abstract class BaseEncoder<TEnc> : BitEncoder<TEnc, char>
     {
-        protected Dictionary<char, TEnc> encoding = new Dictionary<char, TEnc>();
+        private Dictionary<char, TEnc> encoding = new Dictionary<char, TEnc>();
         private Dictionary<TEnc, char> decoding = new Dictionary<TEnc, char>();
 
         public virtual Dictionary<char, TEnc> Encoding

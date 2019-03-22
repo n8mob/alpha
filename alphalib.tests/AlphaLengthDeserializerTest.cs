@@ -7,7 +7,7 @@ namespace com.corporealabstract.alpha.tests
 {
     public class AlphaLengthDeserializerTest
     {
-        private const char ZERO_WIDTH_SPACE = '\u200b';
+        private const char ZeroWidthSpace = '\u200b';
         private AlphaLengthMessage m1;
         private AlphaLengthSerializer e1;
         private Dictionary<char, int> d1;
@@ -25,7 +25,7 @@ namespace com.corporealabstract.alpha.tests
 
             d2 = new Dictionary<char, int>
             {
-                [ZERO_WIDTH_SPACE] = 1,
+                [ZeroWidthSpace] = 1,
                 ['_'] = 2,
                 ['.'] = 3
             };
@@ -49,11 +49,11 @@ namespace com.corporealabstract.alpha.tests
         [Test]
         public void Test2()
         {
-            Assert.Throws(typeof(InvalidOperationException), () => { var ignore = unitUnderTest.Current; });
+            Assert.Throws(typeof(InvalidOperationException), () => { var unused = unitUnderTest.Current; });
             unitUnderTest.MoveNext();
             Assert.AreEqual('A', unitUnderTest.Current);
             Assert.IsTrue(unitUnderTest.MoveNext());
-            Assert.AreEqual(ZERO_WIDTH_SPACE, unitUnderTest.Current);
+            Assert.AreEqual(ZeroWidthSpace, unitUnderTest.Current);
             Assert.IsTrue(unitUnderTest.MoveNext());
             Assert.AreEqual('B', unitUnderTest.Current);
             Assert.IsFalse(unitUnderTest.MoveNext());
@@ -62,22 +62,24 @@ namespace com.corporealabstract.alpha.tests
         [Test]
         public void TestLongMessage()
         {
-            var zw = ZERO_WIDTH_SPACE; // this just makes expectedString shorter
+            var zw = ZeroWidthSpace; // this just makes expectedString shorter
             var expectedString = $"A{zw}B{zw}A{zw}B{zw}B{zw}B{zw}B{zw}B{zw}";
             var expectedBareMessage = "ABABBBBB";
             var expected = expectedString.GetEnumerator();
 
-            AlphaLengthMessage longMessage = new AlphaLengthMessage(e1, "1011010110110110110110");
+            var longMessage = new AlphaLengthMessage(e1, "1011010110110110110110");
 
-            AlphaLengthDeserializer unit2 = new AlphaLengthDeserializer(longMessage);
+            var unit2 = new AlphaLengthDeserializer(longMessage);
 
             while(unit2.MoveNext() && expected.MoveNext())
             {
                 Assert.AreEqual(expected.Current, unit2.Current);
             }
 
+            expected.Dispose();
+
             Assert.AreEqual(expectedString, new string(longMessage.ToArray()));
-            var bareMessage = new string(longMessage.Where(c => c != ZERO_WIDTH_SPACE).ToArray());
+            var bareMessage = new string(longMessage.Where(c => c != ZeroWidthSpace).ToArray());
             Assert.AreEqual(expectedBareMessage, bareMessage);
         }
     }

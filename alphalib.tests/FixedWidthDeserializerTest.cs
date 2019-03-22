@@ -36,7 +36,7 @@ namespace com.corporealabstract.alpha.tests
         [Test]
         public void MainTest()
         {
-            Assert.Throws(typeof(InvalidOperationException), () => { var ignore = unitUnderTest.Current; });
+            Assert.Throws(typeof(InvalidOperationException), () => { var unused = unitUnderTest.Current; });
 
             unitUnderTest.MoveNext();
 

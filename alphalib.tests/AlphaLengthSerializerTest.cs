@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using com.corporealabstract.alpha;
 using NUnit.Framework;
+// ReSharper disable InconsistentNaming
 
 namespace com.corporealabstract.alpha.tests
 {
@@ -30,6 +30,7 @@ namespace com.corporealabstract.alpha.tests
         [Test]
         public void TestUnderscore() => Assert.AreEqual("00", unitUnderTest.MakeBitString('_'));
 
+        [Test]
         public void TestSpace()
         {
             Assert.Throws(typeof(ArgumentException), () => unitUnderTest.MakeBitString(' '));
