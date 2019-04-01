@@ -20,7 +20,7 @@ namespace com.corporealabstract.alpha
             if (curStart < 0)
             {
                 curStart = 0;
-                return true;
+                return !string.IsNullOrEmpty(Message.Code);
             }
             else if (curStart + Message.Serializer.Width > Message.Code.Length)
             {

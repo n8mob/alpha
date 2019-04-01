@@ -49,6 +49,15 @@ namespace com.corporealabstract.alpha.tests
         }
 
         [Test]
+        public void EmptyCodeTest()
+        {
+            var m3 = new FixedWidthMessage(encoder1, "");
+            unitUnderTest = new FixedWidthDeserializer(m3);
+
+            Assert.IsFalse(unitUnderTest.MoveNext(), "Should not be able to move next on empty string");
+        }
+
+        [Test]
         public void PartialLetterTest()
         {
             var m2 = new FixedWidthMessage(encoder1, "01010");
