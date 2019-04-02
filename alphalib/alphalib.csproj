@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>com.corporealabstract.alpha</RootNamespace>
     <PackageId>com.corporealabstract.alpha.lib</PackageId>
-    <Version>0.14.1</Version>
+    <Version>0.14.2</Version>
     <Title>Corporeal Abstract Alpha Library</Title>
     <Authors>n8mob</Authors>
     <Company>Corporeal Abstract</Company>
