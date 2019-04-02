@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 
 namespace com.corporealabstract.alpha.tests
@@ -46,6 +47,15 @@ namespace com.corporealabstract.alpha.tests
             Assert.IsTrue(unitUnderTest.MoveNext());
             Assert.AreEqual('C', unitUnderTest.Current);
             Assert.IsFalse(unitUnderTest.MoveNext(), "MoveNext after last letter");
+        }
+
+        [Test]
+        public void EnumerableToArrayTest()
+        {
+            var m4 = new FixedWidthMessage(encoder1, "");
+            unitUnderTest = new FixedWidthDeserializer(m4);
+
+            Assert.Throws(typeof(InvalidOperationException), () => { var unused = unitUnderTest.Current; });
         }
 
         [Test]

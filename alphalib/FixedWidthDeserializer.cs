@@ -17,6 +17,11 @@ namespace com.corporealabstract.alpha
         
         public bool MoveNext()
         {
+            if (Message.Code == null || Message.Code.Length < Message.Serializer.Width)
+            {
+                return false;
+            }
+            
             if (curStart < 0)
             {
                 curStart = 0;
