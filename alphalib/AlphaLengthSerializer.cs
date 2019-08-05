@@ -25,27 +25,26 @@ namespace com.corporealabstract.alpha
             };
         }
 
-        public string MakeBitString(string s)
+        public string MakeBitString(string s, bool lastLetterGetsSpace = false)
         {
-            return string.Concat(Serialize(s));
+            return string.Concat(Serialize(s, lastLetterGetsSpace));
         }
 
-        public IEnumerable<string> Serialize(string s)
+        public IEnumerable<string> Serialize(string s, bool lastLetterGetsSpace)
         {
-            bool lastWasChar = false;
-
-            foreach (var c in s)
+            for (int i = 0; i < s.Length; i++)
             {
-                var currentIsChar = Encoders['1'].Encoding.ContainsKey(c);
+                var c = s[i];
 
-                if (lastWasChar && currentIsChar)
+                var currentIsChar = Encoders['1'].Encoding.ContainsKey(c);
+                var nextIsChar = (s.Length > i + 1) && (Encoders['1'].Encoding.ContainsKey(s[i + 1]));
+                
+                yield return ChooseEncoder(c).MakeBitString(c);
+
+                if (lastLetterGetsSpace || (currentIsChar && nextIsChar))
                 {
                     yield return "0";
                 }
-
-                yield return ChooseEncoder(c).MakeBitString(c);
-
-                lastWasChar = currentIsChar;
             }
         }
 

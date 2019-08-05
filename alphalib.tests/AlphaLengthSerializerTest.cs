@@ -49,6 +49,18 @@ namespace com.corporealabstract.alpha.tests
         public void TestAB() => Assert.AreEqual("1011", unitUnderTest.MakeBitString("AB"));
 
         [Test]
+        public void TestAWithHang() => 
+            Assert.AreEqual("10", unitUnderTest.MakeBitString("A", true));
+
+        [Test]
+        public void TestBWithHang() => 
+            Assert.AreEqual("110", unitUnderTest.MakeBitString("B", true));
+
+        [Test]
+        public void TestABWithHang() =>
+            Assert.AreEqual("10110", unitUnderTest.MakeBitString("AB", true));
+
+        [Test]
         public void TestAPeriodBPeriod() => Assert.AreEqual("100011000", unitUnderTest.MakeBitString("A.B."));
 
         [Test]
