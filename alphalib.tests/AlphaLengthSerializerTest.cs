@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
+
 // ReSharper disable InconsistentNaming
 
 namespace com.corporealabstract.alpha.tests
@@ -49,11 +50,23 @@ namespace com.corporealabstract.alpha.tests
         public void TestAB() => Assert.AreEqual("1011", unitUnderTest.MakeBitString("AB"));
 
         [Test]
-        public void TestAWithHang() => 
+        public void TestAPeriodBPeriod() => Assert.AreEqual("100011000", unitUnderTest.MakeBitString("A.B."));
+
+        [Test]
+        public void ABPointA() => Assert.AreEqual("10110001", unitUnderTest.MakeBitString("AB.A"));
+
+        [Test]
+        public void ABSpaceABPeriod() => Assert.AreEqual("1011001011000", unitUnderTest.MakeBitString("AB_AB."));
+
+        [Test]
+        public void APointBPointSpaceB() => Assert.AreEqual("1000110000011", unitUnderTest.MakeBitString("A.B._B"));
+
+        [Test]
+        public void TestAWithHang() =>
             Assert.AreEqual("10", unitUnderTest.MakeBitString("A", true));
 
         [Test]
-        public void TestBWithHang() => 
+        public void TestBWithHang() =>
             Assert.AreEqual("110", unitUnderTest.MakeBitString("B", true));
 
         [Test]
@@ -61,15 +74,19 @@ namespace com.corporealabstract.alpha.tests
             Assert.AreEqual("10110", unitUnderTest.MakeBitString("AB", true));
 
         [Test]
-        public void TestAPeriodBPeriod() => Assert.AreEqual("100011000", unitUnderTest.MakeBitString("A.B."));
+        public void TestAPeriodBPeriodWithHang() =>
+            Assert.AreEqual("100011000", unitUnderTest.MakeBitString("A.B.", true));
 
         [Test]
-        public void ABPointA() => Assert.AreEqual("10110001", unitUnderTest.MakeBitString("AB.A"));
+        public void ABPointAWithHang() =>
+            Assert.AreEqual("101100010", unitUnderTest.MakeBitString("AB.A", true));
 
         [Test]
-        public void ABSpaceABPeriod()=> Assert.AreEqual("1011001011000", unitUnderTest.MakeBitString("AB_AB."));
+        public void ABSpaceABPeriodWithHang() =>
+            Assert.AreEqual("1011001011000", unitUnderTest.MakeBitString("AB_AB.", true));
 
         [Test]
-        public void APointBPointSpaceB() => Assert.AreEqual("1000110000011", unitUnderTest.MakeBitString("A.B._B"));
+        public void APointBPointSpaceBWithHang() =>
+            Assert.AreEqual("10001100000110", unitUnderTest.MakeBitString("A.B._B", true));
     }
 }

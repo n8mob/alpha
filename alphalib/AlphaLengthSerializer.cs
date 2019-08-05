@@ -37,11 +37,13 @@ namespace com.corporealabstract.alpha
                 var c = s[i];
 
                 var currentIsChar = Encoders['1'].Encoding.ContainsKey(c);
+                var currentIsLast = i + 1 == s.Length;
                 var nextIsChar = (s.Length > i + 1) && (Encoders['1'].Encoding.ContainsKey(s[i + 1]));
                 
                 yield return ChooseEncoder(c).MakeBitString(c);
-
-                if (lastLetterGetsSpace || (currentIsChar && nextIsChar))
+                
+                if ((currentIsChar && lastLetterGetsSpace && currentIsLast) ||
+                    (currentIsChar && nextIsChar))
                 {
                     yield return "0";
                 }
